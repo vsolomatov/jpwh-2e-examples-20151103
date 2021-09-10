@@ -1,0 +1,5 @@
+# Project exclude paths
+/environment/target/
+/examples/target/
+/model/target/
+/shared/target/
