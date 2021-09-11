@@ -9,12 +9,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Creates an EntityManagerFactory.
- * <p>
- * Configuration of the persistence units is taken from <code>META-INF/persistence.xml</code>
- * and other sources. Additional <code>hbm.xml</code> file names can be given to the
- * constructor.
- * </p>
+ Создает фабрику EntityManagerFactory.
+
+ Конфигурация единиц персистентности берется из META-INF/persistence.xml и других источников.
+
+ Дополнительные имена файлов hbm.xml могут быть переданы конструктору.
+
  */
 public class JPASetup {
 
@@ -28,21 +28,21 @@ public class JPASetup {
 
         this.persistenceUnitName = persistenceUnitName;
 
-        // No automatic scanning by Hibernate, all persistence units list explicit classes/packages
+        // Отсутствие автоматического сканирования Hibernate, все единицы сохранения перечисляют явные классы/пакеты
         properties.put(
             "hibernate.archive.autodetection",
             "none"
         );
 
-        // Really the only way how we can get hbm.xml files into an explicit persistence
-        // unit (where Hibernate scanning is disabled)
+        // Действительно, единственный способ получить файлы hbm.xml в явную единицу персистентности
+        // (где сканирование Hibernate отключено).
         properties.put(
             "hibernate.hbmxml.files",
             StringHelper.join(",", hbmResources != null ? hbmResources : new String[0])
         );
 
-        // We don't want to repeat these settings for all units in persistence.xml, so
-        // they are set here programmatically
+        // Мы не хотим повторять эти настройки для всех блоков в persistence.xml,
+        // поэтому они устанавливаются здесь программно
         properties.put(
             "hibernate.format_sql",
             "true"
@@ -83,7 +83,7 @@ public class JPASetup {
     }
 
     public void generateSchema(String action) {
-        // Take exiting EMF properties, override the schema generation setting on a copy
+        // Взять свойства выходящего EMF, переопределить настройки генерации схемы для копии
         Map<String, String> createSchemaProperties = new HashMap<>(properties);
         createSchemaProperties.put(
             "javax.persistence.schema-generation.database.action",

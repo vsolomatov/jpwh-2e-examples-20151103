@@ -7,26 +7,23 @@ import org.testng.annotations.BeforeMethod;
 import java.io.*;
 
 /**
- * Starts and stops the JPA environment before/after a test class.
- * <p>
- * Create a subclass to write unit tests. Access the <code>EntityManagerFactory</code>
- * with {@link JPATest#JPA} and create <code>EntityManager</code> instances.
- * </p>
- * <p>
- * Drops and creates the SQL database schema of the persistence unit before and after
- * every test method. This means your database will be cleaned for every test method.
- * </p>
- * <p>
- * Override the {@link #configurePersistenceUnit} method to provide a custom
- * persistence unit name or additional <code>hbm.xml</code> file names to load for
- * your test class.
- * </p>
- * <p>
- * Override the {@link #afterJPABootstrap()} method to execute operations before the
- * test method but after the <code>EntityManagerFactory</code> is ready. At this point
- * you can create an <code>EntityManager</code> or <code>Session#doWork(JDBC)</code>. If
- * cleanup is needed, override the {@link #beforeJPAClose()} method.
- * </p>
+ Запускает и останавливает среду JPA до/после тестового класса.
+
+     Создайте подкласс для написания модульных тестов.
+     Получите доступ к EntityManagerFactory с помощью JPATest.JPA и создавайте экземпляры EntityManager.
+
+ Сбрасывает и создает схему базы данных SQL единицы персистентности до и после каждого метода тестирования.
+ Это означает, что ваша база данных будет очищаться для каждого метода тестирования.
+
+     Переопределите метод configurePersistenceUnit, чтобы указать пользовательское имя единицы персистентности
+     или дополнительные имена файлов hbm.xml для загрузки для вашего тестового класса.
+
+     Переопределите метод afterJPABootstrap(), чтобы выполнить операции до метода тестирования,
+     но после того, как EntityManagerFactory будет готова.
+     В этот момент вы можете создать EntityManager или Session#doWork(JDBC).
+
+     Если требуется очистка, переопределите метод beforeJPAClose().
+
  */
 public class JPATest extends TransactionManagerTest {
 
@@ -52,9 +49,9 @@ public class JPATest extends TransactionManagerTest {
     @BeforeMethod
     public void beforeMethod() throws Exception {
         JPA = new JPASetup(TM.databaseProduct, persistenceUnitName, hbmResources);
-        // Always drop the schema, cleaning up at least some of the artifacts
-        // that might be left over from the last run, if it didn't cleanup
-        // properly
+        // Всегда сбрасывайте схему, очищая хотя бы некоторые артефакты,
+        // которые могли остаться после последнего запуска,
+        // если вдруг очистка не была выполнена правильно
         JPA.dropSchema();
 
         JPA.createSchema();
