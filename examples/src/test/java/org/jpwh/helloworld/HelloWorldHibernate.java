@@ -20,6 +20,9 @@ import static org.testng.Assert.*;
 
 public class HelloWorldHibernate extends TransactionManagerTest {
 
+    /*
+        В наиболее кратком виде построение SessionFactory выглядит следующим образом
+     */
     protected void unusedSimpleBoot() {
         SessionFactory sessionFactory = new MetadataSources(
             new StandardServiceRegistryBuilder()
@@ -27,6 +30,10 @@ public class HelloWorldHibernate extends TransactionManagerTest {
         ).buildMetadata().buildSessionFactory();
     }
 
+    /*
+        Метод для создания SessionFactory который используется (здесь, в этом классе) в нашем примере
+        (в отличие от метода приведенного выше)
+     */
     protected SessionFactory createSessionFactory() {
 
         /* 
@@ -36,7 +43,7 @@ public class HelloWorldHibernate extends TransactionManagerTest {
             new StandardServiceRegistryBuilder();
 
         /* 
-            Настройте реестр служб, применив настройки.
+            Настройте (сконфигурируйте) реестр служб, применив настройки.
          */
         serviceRegistryBuilder
             .applySetting("hibernate.connection.datasource", "myDS")
@@ -59,23 +66,28 @@ public class HelloWorldHibernate extends TransactionManagerTest {
 
         /* 
             Добавьте свои постоянные классы в источники метаданных (сопоставление).
+            Т.е. сообщите Hibernate, какие из хранимых классов являются частью метаданных отображения.
          */
         metadataSources.addAnnotatedClass(
             org.jpwh.model.helloworld.Message.class
         );
-
+        // В прикладном программном интерфейсе MetadataSources имеется
+        // множество методов для добавления источников отображений;
+        // за дополнительной информацией обращайтесь к документации JavaDoc
         // Add hbm.xml mapping files
         // metadataSources.addFile(...);
-
         // Read all hbm.xml mapping files from a JAR
         // metadataSources.addJar(...)
 
+        // Построение всех метаданных, нужных фреймворку Hibernate, с помощью экземпляра MetadataBuilder,
+        // полученного из источников метаданных
         MetadataBuilder metadataBuilder = metadataSources.getMetadataBuilder();
 
+        // Можно запросить метаданные для программного взаимодействия с конфигурацией Hibernate
         Metadata metadata = metadataBuilder.build();
-
         assertEquals(metadata.getEntityBindings().size(), 1);
 
+        // И наконец, создаем SessionFactory
         SessionFactory sessionFactory = metadata.buildSessionFactory();
 
         return sessionFactory;
