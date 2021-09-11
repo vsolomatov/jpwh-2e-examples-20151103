@@ -3,3 +3,5 @@
 /examples/target/
 /model/target/
 /shared/target/
+/.idea/
+/*.log
