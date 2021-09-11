@@ -17,7 +17,7 @@ public enum DatabaseProduct {
                     "URL",
                     connectionURL != null
                         ? connectionURL :
-                        "jdbc:h2:tcp://localhost/~/test" //ToDo раскомментировать "jdbc:h2:mem:test"
+                        "jdbc:h2:tcp://localhost/~/test" //ToDo если хранить данные в памяти: "jdbc:h2:mem:test"
                 );
 
                 // Тут написано про то, что существует ошибка, которая не позволяет указать имя пользователя в строке URL, как предлагается выше
