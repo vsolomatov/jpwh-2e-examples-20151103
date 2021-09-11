@@ -23,49 +23,49 @@ public class HelloWorldJPA extends TransactionManagerTest {
         try {
             {
                 /* 
-                    Get access to the standard transaction API <code>UserTransaction</code> and
-                    begin a transaction on this thread of execution.
+                    Получите доступ к стандартному API транзакций UserTransaction
+                    и начните транзакцию в этом потоке выполнения.
                  */
                 UserTransaction tx = TM.getUserTransaction();
                 tx.begin();
 
                 /* 
-                    Begin a new session with the database by creating an <code>EntityManager</code>, this
-                    is your context for all persistence operations.
+                    Начните новый сеанс с базой данных, создав EntityManager,
+                    это ваш контекст для всех операций сохранения.
                  */
                 EntityManager em = emf.createEntityManager();
 
                 /* 
-                    Create a new instance of the mapped domain model class <code>Message</code> and
-                    set its <code>text</code> property.
+                    Создайте новый экземпляр сопоставленного класса модели предметной области Message
+                    и задайте его текстовое свойство.
                  */
                 Message message = new Message();
                 message.setText("Hello World!");
 
                 /* 
-                    Enlist the transient instance with your persistence context, you make it persistent.
-                    Hibernate now knows that you wish to store that data, it doesn't necessarily call the
-                    database immediately, however.
+                    Подключите временный экземпляр к своему контексту постоянства, вы сделаете его постоянным.
+                    Теперь Hibernate знает, что вы хотите сохранить эти данные,
+                    однако он не обязательно сразу вызывает базу данных.
                  */
                 em.persist(message);
 
                 /* 
-                    Commit the transaction, Hibernate now automatically checks the persistence context and
-                    executes the necessary SQL <code>INSERT</code> statement.
+                    Зафиксируйте транзакцию, Hibernate теперь автоматически проверяет контекст сохранения
+                    и выполняет необходимую инструкцию SQL INSERT.
                  */
                 tx.commit();
                 // INSERT into MESSAGE (ID, TEXT) values (1, 'Hello World!')
 
                 /* 
-                    If you create an <code>EntityManager</code>, you must close it.
+                    Если вы создаете EntityManager, вы должны его закрыть.
                  */
                 em.close();
             }
 
             {
                 /* 
-                    Every interaction with your database should occur within explicit transaction boundaries,
-                    even if you are only reading data.
+                    Каждое взаимодействие с вашей базой данных должно происходить в пределах явных границ транзакции,
+                    даже если вы только читаете данные.
                  */
                 UserTransaction tx = TM.getUserTransaction();
                 tx.begin();
@@ -73,7 +73,7 @@ public class HelloWorldJPA extends TransactionManagerTest {
                 EntityManager em = emf.createEntityManager();
 
                 /* 
-                    Execute a query to retrieve all instances of <code>Message</code> from the database.
+                    Выполните запрос, чтобы получить все экземпляры сообщения из базы данных.
                  */
                 List<Message> messages =
                     em.createQuery("select m from Message m").getResultList();
@@ -84,14 +84,16 @@ public class HelloWorldJPA extends TransactionManagerTest {
                 assertEquals(messages.get(0).getText(), "Hello World!");
 
                 /* 
-                    You can change the value of a property, Hibernate will detect this automatically because
-                    the loaded <code>Message</code> is still attached to the persistence context it was loaded in.
+                    Вы можете изменить значение свойства, Hibernate обнаружит это автоматически,
+                    потому что загруженное сообщение все еще прикреплено к контексту сохранения,
+                    в который оно было загружено.
                  */
                 messages.get(0).setText("Take me to your leader!");
 
                 /* 
-                    On commit, Hibernate checks the persistence context for dirty state and executes the
-                    SQL <code>UPDATE</code> automatically to synchronize the in-memory with the database state.
+                    При фиксации Hibernate проверяет контекст сохранения на наличие грязного состояния
+                    и автоматически выполняет SQL UPDATE,
+                    чтобы синхронизировать данные в памяти с состоянием базы данных.
                  */
                 tx.commit();
                 // UPDATE MESSAGE set TEXT = 'Take me to your leader!' where ID = 1

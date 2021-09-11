@@ -11,13 +11,12 @@ import javax.transaction.UserTransaction;
 import java.util.logging.Logger;
 
 /**
- * Provides a database connection pool with the Bitronix JTA transaction
- * manager (http://docs.codehaus.org/display/BTM/Home).
- * <p>
- * Hibernate will look up the datasource and <code>UserTransaction</code> through
- * JNDI, that's why you also need a <code>jndi.properties</code> file. A minimal
- * JNDI context is bundled with and started by Bitronix.
- * </p>
+ Предоставляет пул соединений с базой данных
+ с менеджером транзакций Bitronix JTA (http://docs.codehaus.org/display/BTM/Home).
+
+ Hibernate будет искать источник данных и UserTransaction через JNDI,
+ поэтому вам также понадобится файл jndi.properties.
+ Минимальный контекст JNDI связан с Bitronix и запускается им.
  */
 public class TransactionManagerSetup {
 
@@ -58,14 +57,13 @@ public class TransactionManagerSetup {
         datasource.setMaxPoolSize(5);
         datasource.setPreparedStatementCacheSize(10);
 
-        // Our locking/versioning tests assume READ COMMITTED transaction
-        // isolation. This is not the default on MySQL InnoDB, so we set
-        // it here explicitly.
+        // Наши тесты блокировки/управления версиями предполагают изоляцию транзакции READ COMMITTED.
+        // Это не значение по умолчанию для MySQL, поэтому мы устанавливаем его здесь явно.
         datasource.setIsolationLevel("READ_COMMITTED");
 
-        // Hibernate's SQL schema generator calls connection.setAutoCommit(true)
-        // and we use auto-commit mode when the EntityManager is in suspended
-        // mode and not joined with a transaction.
+        // Генератор схемы SQL Hibernate вызывает connection.setAutoCommit(true),
+        // и мы используем режим автоматической фиксации, когда EntityManager находится в приостановленном режиме
+        // и не связан с транзакцией.
         datasource.setAllowLocalTransactions(true);
 
         logger.info("Setting up database connection: " + databaseProduct);

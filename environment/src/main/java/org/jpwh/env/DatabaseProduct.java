@@ -20,7 +20,9 @@ public enum DatabaseProduct {
                         "jdbc:h2:tcp://localhost/~/test" //ToDo если хранить данные в памяти: "jdbc:h2:mem:test"
                 );
 
-                // Тут написано про то, что существует ошибка, которая не позволяет указать имя пользователя в строке URL, как предлагается выше
+                // Тут написано про то, что существует ошибка,
+                // которая не позволяет указать имя пользователя в строке URL,
+                // как предлагается выше
                 // TODO: http://code.google.com/p/h2database/issues/detail?id=502
                 ds.getDriverProperties().put("user", "sa");
 

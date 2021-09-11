@@ -30,14 +30,13 @@ public class HelloWorldHibernate extends TransactionManagerTest {
     protected SessionFactory createSessionFactory() {
 
         /* 
-            This builder helps you create the immutable service registry with
-            chained method calls.
+            Этот конструктор поможет вам создать неизменяемый реестр служб с помощью связанных вызовов методов.
          */
         StandardServiceRegistryBuilder serviceRegistryBuilder =
             new StandardServiceRegistryBuilder();
 
         /* 
-            Configure the services registry by applying settings.
+            Настройте реестр служб, применив настройки.
          */
         serviceRegistryBuilder
             .applySetting("hibernate.connection.datasource", "myDS")
@@ -45,8 +44,8 @@ public class HelloWorldHibernate extends TransactionManagerTest {
             .applySetting("hibernate.use_sql_comments", "true")
             .applySetting("hibernate.hbm2ddl.auto", "create-drop");
 
-        // Enable JTA (this is a bit crude because Hibernate devs still believe that JTA is
-        // used only in monstrous application servers and you'll never see this code).
+        // Включите JTA (это немного грубо, потому что разработчики Hibernate все еще считают,
+        // что JTA используется только в чудовищных серверах приложений, и вы никогда не увидите этот код).
         serviceRegistryBuilder.applySetting(
             Environment.TRANSACTION_COORDINATOR_STRATEGY,
             JtaTransactionCoordinatorBuilderImpl.class
@@ -54,12 +53,12 @@ public class HelloWorldHibernate extends TransactionManagerTest {
         ServiceRegistry serviceRegistry = serviceRegistryBuilder.build();
 
         /* 
-            You can only enter this configuration stage with an existing service registry.
+            На этот этап настройки можно войти только с существующим реестром служб.
          */
         MetadataSources metadataSources = new MetadataSources(serviceRegistry);
 
         /* 
-            Add your persistent classes to the (mapping) metadata sources.
+            Добавьте свои постоянные классы в источники метаданных (сопоставление).
          */
         metadataSources.addAnnotatedClass(
             org.jpwh.model.helloworld.Message.class
@@ -88,17 +87,17 @@ public class HelloWorldHibernate extends TransactionManagerTest {
         try {
             {
                 /* 
-                    Get access to the standard transaction API <code>UserTransaction</code> and
-                    begin a transaction on this thread of execution.
+                    Получите доступ к стандартному API транзакций UserTransaction
+                    и начните транзакцию в этом потоке выполнения.
                  */
                 UserTransaction tx = TM.getUserTransaction();
                 tx.begin();
 
                 /* 
-                    Whenever you call <code>getCurrentSession()</code> in the same thread you get
-                    the same <code>org.hibernate.Session</code>. It's bound automatically to the
-                    ongoing transaction and is closed for you automatically when that transaction
-                    commits or rolls back.
+                    Всякий раз, когда вы вызываете getCurrentSession() в том же потоке,
+                    вы получаете тот же org.hibernate.Session.
+                    Он автоматически привязывается к текущей транзакции и автоматически закрывается для вас,
+                    когда транзакция фиксируется или откатывается.
                  */
                 Session session = sessionFactory.getCurrentSession();
 
@@ -106,14 +105,14 @@ public class HelloWorldHibernate extends TransactionManagerTest {
                 message.setText("Hello World!");
 
                 /* 
-                    The native Hibernate API is very similar to the standard Java Persistence API and most methods
-                    have the same name.
+                    Собственный Hibernate API очень похож на стандартный Java Persistence API,
+                    и большинство методов имеют то же имя.
                  */
                 session.persist(message);
 
                 /* 
-                    Hibernate synchronizes the session with the database and closes the "current"
-                    session on commit of the bound transaction automatically.
+                    Hibernate синхронизирует сеанс с базой данных
+                    и автоматически закрывает «текущий» сеанс при фиксации связанной транзакции.
                  */
                 tx.commit();
                 // INSERT into MESSAGE (ID, TEXT) values (1, 'Hello World!')
@@ -124,8 +123,8 @@ public class HelloWorldHibernate extends TransactionManagerTest {
                 tx.begin();
 
                 /* 
-                    A Hibernate criteria query is a type-safe programmatic way to express queries,
-                    automatically translated into SQL.
+                    Запрос критериев Hibernate - это типобезопасный программный способ выражения запросов,
+                    автоматически переводимых в SQL.
                  */
                 List<Message> messages =
                     sessionFactory.getCurrentSession().createCriteria(
