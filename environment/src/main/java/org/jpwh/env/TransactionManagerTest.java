@@ -33,7 +33,7 @@ public class TransactionManagerTest {
         TM = new TransactionManagerSetup(
             database != null
                 ? DatabaseProduct.valueOf(database.toUpperCase(Locale.US))
-                : DatabaseProduct.POSTGRESQL, // ToDo Изменил (было H2),
+                : DatabaseProduct.H2,
             connectionURL
         );
     }

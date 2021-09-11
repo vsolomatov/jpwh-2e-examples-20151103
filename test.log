@@ -14,6 +14,9 @@
 [INFO] 
 [INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ jpwh ---
 [INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ jpwh ---
+[INFO] Installing D:\MyProjects\jpwh-2e-examples-20151103\pom.xml to C:\Users\vvsol\.m2\repository\org\jpwh\jpwh\1.0-SNAPSHOT\jpwh-1.0-SNAPSHOT.pom
+[INFO] 
 [INFO] --------------------------< org.jpwh:shared >---------------------------
 [INFO] Building Shared 1.0-SNAPSHOT                                       [2/5]
 [INFO] --------------------------------[ jar ]---------------------------------
@@ -41,6 +44,13 @@
 [INFO] --- maven-surefire-plugin:2.19.1:test (default-test) @ shared ---
 [INFO] Tests are skipped.
 [INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ shared ---
+[INFO] Building jar: D:\MyProjects\jpwh-2e-examples-20151103\shared\target\shared-1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ shared ---
+[INFO] Installing D:\MyProjects\jpwh-2e-examples-20151103\shared\target\shared-1.0-SNAPSHOT.jar to C:\Users\vvsol\.m2\repository\org\jpwh\shared\1.0-SNAPSHOT\shared-1.0-SNAPSHOT.jar
+[INFO] Installing D:\MyProjects\jpwh-2e-examples-20151103\shared\pom.xml to C:\Users\vvsol\.m2\repository\org\jpwh\shared\1.0-SNAPSHOT\shared-1.0-SNAPSHOT.pom
+[INFO] 
 [INFO] ------------------------< org.jpwh:environment >------------------------
 [INFO] Building Environment 1.0-SNAPSHOT                                  [3/5]
 [INFO] --------------------------------[ jar ]---------------------------------
@@ -65,6 +75,13 @@
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.19.1:test (default-test) @ environment ---
 [INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ environment ---
+[INFO] Building jar: D:\MyProjects\jpwh-2e-examples-20151103\environment\target\environment-1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ environment ---
+[INFO] Installing D:\MyProjects\jpwh-2e-examples-20151103\environment\target\environment-1.0-SNAPSHOT.jar to C:\Users\vvsol\.m2\repository\org\jpwh\environment\1.0-SNAPSHOT\environment-1.0-SNAPSHOT.jar
+[INFO] Installing D:\MyProjects\jpwh-2e-examples-20151103\environment\pom.xml to C:\Users\vvsol\.m2\repository\org\jpwh\environment\1.0-SNAPSHOT\environment-1.0-SNAPSHOT.pom
 [INFO] 
 [INFO] ---------------------------< org.jpwh:model >---------------------------
 [INFO] Building Model 1.0-SNAPSHOT                                        [4/5]
@@ -105,6 +122,13 @@
 [INFO] --- maven-surefire-plugin:2.19.1:test (default-test) @ model ---
 [INFO] Tests are skipped.
 [INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ model ---
+[INFO] Building jar: D:\MyProjects\jpwh-2e-examples-20151103\model\target\model-1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ model ---
+[INFO] Installing D:\MyProjects\jpwh-2e-examples-20151103\model\target\model-1.0-SNAPSHOT.jar to C:\Users\vvsol\.m2\repository\org\jpwh\model\1.0-SNAPSHOT\model-1.0-SNAPSHOT.jar
+[INFO] Installing D:\MyProjects\jpwh-2e-examples-20151103\model\pom.xml to C:\Users\vvsol\.m2\repository\org\jpwh\model\1.0-SNAPSHOT\model-1.0-SNAPSHOT.pom
+[INFO] 
 [INFO] -------------------------< org.jpwh:examples >--------------------------
 [INFO] Building Examples 1.0-SNAPSHOT                                     [5/5]
 [INFO] --------------------------------[ jar ]---------------------------------
@@ -137,45 +161,31 @@
  T E S T S
 -------------------------------------------------------
 Running TestSuite
-Tests run: 551, Failures: 1, Errors: 0, Skipped: 550, Time elapsed: 1.243 sec <<< FAILURE! - in TestSuite
-beforeSuite(org.jpwh.test.bulkbatch.BulkStatementsSQL)  Time elapsed: 0.707 sec  <<< FAILURE!
-bitronix.tm.resource.ResourceConfigurationException: cannot create JDBC datasource named myDS
-Caused by: org.h2.jdbc.JdbcSQLException: 
-Неподдерживаемая опция соединения " USER"
-Unsupported connection setting " USER" [90113-171]
-
+Tests run: 216, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 66.169 sec - in TestSuite
 
 Results :
 
-Failed tests: 
-  BulkStatementsSQL>TransactionManagerTest.beforeSuite:35 » ResourceConfiguration
+Tests run: 216, Failures: 0, Errors: 0, Skipped: 0
 
-Tests run: 460, Failures: 1, Errors: 0, Skipped: 459
-
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ examples ---
+[WARNING] JAR will be empty - no content was marked for inclusion!
+[INFO] Building jar: D:\MyProjects\jpwh-2e-examples-20151103\examples\target\examples-1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ examples ---
+[INFO] Installing D:\MyProjects\jpwh-2e-examples-20151103\examples\target\examples-1.0-SNAPSHOT.jar to C:\Users\vvsol\.m2\repository\org\jpwh\examples\1.0-SNAPSHOT\examples-1.0-SNAPSHOT.jar
+[INFO] Installing D:\MyProjects\jpwh-2e-examples-20151103\examples\pom.xml to C:\Users\vvsol\.m2\repository\org\jpwh\examples\1.0-SNAPSHOT\examples-1.0-SNAPSHOT.pom
 [INFO] ------------------------------------------------------------------------
 [INFO] Reactor Summary for JPwH 1.0-SNAPSHOT:
 [INFO] 
-[INFO] JPwH ............................................... SUCCESS [  0.111 s]
-[INFO] Shared ............................................. SUCCESS [  1.108 s]
-[INFO] Environment ........................................ SUCCESS [  0.269 s]
-[INFO] Model .............................................. SUCCESS [  4.144 s]
-[INFO] Examples ........................................... FAILURE [  4.579 s]
+[INFO] JPwH ............................................... SUCCESS [  0.220 s]
+[INFO] Shared ............................................. SUCCESS [  1.221 s]
+[INFO] Environment ........................................ SUCCESS [  0.346 s]
+[INFO] Model .............................................. SUCCESS [  4.503 s]
+[INFO] Examples ........................................... SUCCESS [01:09 min]
 [INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
+[INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  10.306 s
-[INFO] Finished at: 2021-09-10T22:39:52+05:00
+[INFO] Total time:  01:16 min
+[INFO] Finished at: 2021-09-11T10:13:53+05:00
 [INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.19.1:test (default-test) on project examples: There are test failures.
-[ERROR] 
-[ERROR] Please refer to D:\MyProjects\jpwh-2e-examples-20151103\examples\target\surefire-reports for the individual test results.
-[ERROR] -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
-[ERROR] 
-[ERROR] After correcting the problems, you can resume the build with the command
-[ERROR]   mvn <args> -rf :examples
